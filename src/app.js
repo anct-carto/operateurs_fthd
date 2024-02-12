@@ -13,8 +13,6 @@ function operateurInfo(feature) {
     const operateurContent = document.getElementById("operateur-content");
     const dataInfos = feature.properties;
     operateurContent.classList.add("operator-content"); // permet de définir le style en CSS 
-    operateurContent.innerHTML = '<div class="dep-txt-sidebar">' + dataInfos['dep'] + '</div>';
-
     const noOfferMessage = "Le territoire ne possède actuellement pas d'offre de nos partenaires.";
 
     if (dataInfos['opérateur1'] !== noOfferMessage) { //Si la valeur de l'opérateur1 mentionne qu'il n'y a pas de partenaires, alors on affiche pas de contenu.
@@ -48,6 +46,7 @@ function createListOperateur(feature){
     const listOperateurs = document.querySelector(".liste-operateurs");
     listOperateurs.classList.add("operator-list");
 
+
     // Boucle pour ajouter chaque opérateur
     for (let i = 1; i <= 7; i++) {
         const operateurKey = 'opérateur' + i;
@@ -72,12 +71,14 @@ function createListOperateur(feature){
 // Création du contenu de la sidebar
 function createSidebarContent(feature) {
     
+    const cardHeader = document.querySelector(".card-header");
     const listOperateurs = document.querySelector(".liste-operateurs");
     const bntOperateur = document.getElementById("bnt-operateur");
     const bntRetourListe = document.getElementById("bnt-retour-liste");
     const operateurContent = document.getElementById("operateur-content");
     const dataInfos = feature.properties;
     
+    listOperateurs.innerHTML = '';
     operateurContent.innerHTML = '';
     
     //gestion des styles
@@ -87,8 +88,8 @@ function createSidebarContent(feature) {
     operateurContent.style.display='none';
 
 
-    // Initialisation du contenu
-    listOperateurs.innerHTML = '<div id="nom-programme" class="dep-txt-sidebar"><span><p class="title-card-header">' + dataInfos[`dep`] + '</p></span></div>';
+    // Récupérer le titre : nom du département séléctionné
+    cardHeader.innerHTML = '<div id="nom-programme" ><span><p class="dep-txt-sidebar">' + dataInfos[`dep`] + '</p></span></div>';
 
     createListOperateur(feature);
     operateurInfo(feature);
@@ -194,9 +195,9 @@ function createGeoJSONHab(data, map) {
 function createGeoJSONHabBis(data, map) {
     new L.geoJSON(data, {
         style: {
-            color: '#e8ded2',
+            color: '#F2E8DC',
             weight: 1,
-            fillOpacity: 0.3,
+            fillOpacity:1,
         },
     }).addTo(map);
 };
@@ -245,7 +246,6 @@ function resetDepStyles(depLayerResetStyle) {
     }
 }
 
-
 //Creation de la searchBar
 function createSearchBar(data, map){
     //Ajour d'une barre de recherche par département
@@ -293,8 +293,8 @@ function createSearchBar(data, map){
 /*     CARTE      */
 /* -------------- */
 var mymap = L.map('map');
+mymap.attributionControl.addAttribution('Licensed by © <a href="some_link", class="your_class">Habijabi</a>');
 
-// bloquer le déplacement de la carte de gauche à droite
 mymap.dragging.disable();
 
 //Niveau de zoom : Min & Max
@@ -337,9 +337,21 @@ sidebar.open('home');
 const fthdInit = loadData("data/geom/data_dep.geojson");
 
 // // Ajout d'une nouvelle couches d'habillages
-const contoursOutreMer = loadData("data/geom/contours_outre_mer.geojson");
 const contoursIleReprojete = loadData("data/geom/contours_iles_reprojetees.geojson");
 const territoiresFrontaliers= loadData("data/geom/territoires_frontaliers.geojson");
+// const habGuyane= loadData("data/geom/habillage_guyane.geojson");
+
+
+// Création couches contours DROM COM 
+Promise.all([contoursIleReprojete]).then(([contoursIleReprojeteLayer]) => {
+    createGeoJSONHab(contoursIleReprojeteLayer, mymap);
+});
+// Création couche territoires frontaliers 
+Promise.all([territoiresFrontaliers]).then(([territoiresFrontaliersLayer]) => {
+    createGeoJSONHabBis(territoiresFrontaliersLayer, mymap);
+
+});
+
 
 // Création couche principale
 Promise.all([fthdInit]).then(([fthdLayer]) => {
@@ -362,16 +374,6 @@ Promise.all([fthdInit]).then(([fthdLayer]) => {
     }
 });
 
-// Création couches contours DROM COM 
-Promise.all([contoursOutreMer, contoursIleReprojete]).then(([contoursOutreMerLayer, contoursIleReprojeteLayer]) => {
-    createGeoJSONHab(contoursOutreMerLayer, mymap);
-    createGeoJSONHab(contoursIleReprojeteLayer, mymap);
-});
-
-// Création couche territoires frontaliers 
-Promise.all([territoiresFrontaliers]).then(([territoiresFrontaliersLayer]) => {
-    createGeoJSONHabBis(territoiresFrontaliersLayer, mymap);
-});
 
 
 

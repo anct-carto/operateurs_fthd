@@ -15,7 +15,7 @@ html, body {
 #map {
     height: 100%; 
     width: 100%; 
-    background-color: white;
+    background-color:white;
 }
 
 
@@ -28,29 +28,26 @@ html, body {
 
 .text-anct {
 	font-family: 'Marianne-regular', sans-serif;
-	font-size: 13px;
-	text-align: justify;
-	padding-left: 5px;
-	padding-right: 15px;
+	font-size: 12px;
+	text-align: left;
+	padding-left: 10px;
+	padding-right: 35px;
 	line-height: 1.7;
 
 }
 .text-anct-petit {
 	font-family: 'Marianne-regular', sans-serif;
 	font-size: 11px;
-	text-align: justify;
-	padding-left: 5px;
-	padding-right: 15px;
 	line-height: 1;
 
 }
 
 .titre-sidebar {
     color: #e62d3c; 
-    font-weight: bold; 
-    font-size: 18px; 
+    font-weight: 800; 
+    font-size: 26px; 
 	text-align: left;
-	margin-bottom: 50px;
+	margin-bottom: 30px;
 }
 
 /* --------------- */
@@ -118,16 +115,23 @@ html, body {
 	padding:0px 0px 0px 5px;
 }
  
-.logo-anct-marianne-fthd {
-    width : 90%;
-    max-width: 100%;
+.logo-anct-marianne{
+    width : 70%;
+    /* max-width: 100%; */
     height: auto;
-	margin-top: 20px;
-    margin-bottom: 50px;
-	padding-right: 10px;
-	padding-left: 10px;
+
     transition: width 0.3s;
 }  
+
+.logo-fthd {
+    width : 50%;
+    /* max-width: 100%; */
+	padding: 5px 0px 35px 15px;
+    height: auto;
+    transition: width 0.3s;
+}  
+
+
 
 /* --------------- */
 /* SIDEBAR CONTENT*/
@@ -147,8 +151,10 @@ html, body {
     font-size: 21px;
     font-weight: bold;
     color: #398373;
+	padding : 0px;
 	text-transform: uppercase; /* Convertit le texte en majuscules */
 	margin-bottom: 10px;
+	padding: 10px px 5px 5px;
 
 	
 }
@@ -156,7 +162,7 @@ html, body {
 /* Liste des opérateurs par dep */
 .operator-list {
     margin: 10px;
-    padding: 5px; /* Espacement interne */
+    padding:  5px  5px  5px 30px; /* Espacement interne */
     font-family: 'Marianne', sans-serif; /* Police de caractères Marianne */
     font-size: 14px; /* Taille de police */
     color: #000; /* Couleur du texte noire */
