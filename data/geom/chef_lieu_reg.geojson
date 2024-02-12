@@ -1,0 +1,25 @@
+{
+"type": "FeatureCollection",
+"name": "chef_lieu_reg",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "insee_reg": "01", "cheflieu_reg": "97105", "iso_reg": "FR-971", "lib_com": "Basse-Terre", "lib_com_carto": "Basse Terre", "iso_territoire_2": "GP" }, "geometry": { "type": "Point", "coordinates": [ -4.894559570177177, 45.12072620405214 ] } },
+{ "type": "Feature", "properties": { "insee_reg": "02", "cheflieu_reg": "97209", "iso_reg": "FR-972", "lib_com": "Fort-de-France", "lib_com_carto": "Fort de France", "iso_territoire_2": "MQ" }, "geometry": { "type": "Point", "coordinates": [ -4.378495711845726, 44.096560149253527 ] } },
+{ "type": "Feature", "properties": { "insee_reg": "03", "cheflieu_reg": "97302", "iso_reg": "FR-973", "lib_com": "Cayenne", "lib_com_carto": "Cayenne", "iso_territoire_2": "GF" }, "geometry": { "type": "Point", "coordinates": [ -3.856855038086707, 43.106017435788033 ] } },
+{ "type": "Feature", "properties": { "insee_reg": "04", "cheflieu_reg": "97411", "iso_reg": "FR-974", "lib_com": "Saint-Denis", "lib_com_carto": "Saint Denis", "iso_territoire_2": "RE" }, "geometry": { "type": "Point", "coordinates": [ -4.139090266855211, 41.883004823529397 ] } },
+{ "type": "Feature", "properties": { "insee_reg": "06", "cheflieu_reg": "97608", "iso_reg": "FR-976", "lib_com": "Dzaoudzi", "lib_com_carto": "Dzaoudzi", "iso_territoire_2": "YT" }, "geometry": { "type": "Point", "coordinates": [ -1.881609813718502, 41.806973432050114 ] } },
+{ "type": "Feature", "properties": { "insee_reg": "11", "cheflieu_reg": "75056", "iso_reg": "FR-IDF", "lib_com": "Paris", "lib_com_carto": "Paris", "iso_territoire_2": "FR" }, "geometry": { "type": "Point", "coordinates": [ 2.342114432952401, 48.856651711572589 ] } },
+{ "type": "Feature", "properties": { "insee_reg": "24", "cheflieu_reg": "45234", "iso_reg": "FR-CVL", "lib_com": "Orléans", "lib_com_carto": "Orléans", "iso_territoire_2": "FR" }, "geometry": { "type": "Point", "coordinates": [ 1.920256199848732, 47.869288029832603 ] } },
+{ "type": "Feature", "properties": { "insee_reg": "27", "cheflieu_reg": "21231", "iso_reg": "FR-BFC", "lib_com": "Dijon", "lib_com_carto": "Dijon", "iso_territoire_2": "FR" }, "geometry": { "type": "Point", "coordinates": [ 5.037544114154777, 47.32271694632469 ] } },
+{ "type": "Feature", "properties": { "insee_reg": "28", "cheflieu_reg": "76540", "iso_reg": "FR-NOR", "lib_com": "Rouen", "lib_com_carto": "Rouen", "iso_territoire_2": "FR" }, "geometry": { "type": "Point", "coordinates": [ 1.095382994945797, 49.44150627703025 ] } },
+{ "type": "Feature", "properties": { "insee_reg": "32", "cheflieu_reg": "59350", "iso_reg": "FR-HDF", "lib_com": "Lille", "lib_com_carto": "Lille", "iso_territoire_2": "FR" }, "geometry": { "type": "Point", "coordinates": [ 3.046359148284201, 50.631501767548315 ] } },
+{ "type": "Feature", "properties": { "insee_reg": "44", "cheflieu_reg": "67482", "iso_reg": "FR-GES", "lib_com": "Strasbourg", "lib_com_carto": "Strasbourg", "iso_territoire_2": "FR" }, "geometry": { "type": "Point", "coordinates": [ 7.767306925670231, 48.570638415082037 ] } },
+{ "type": "Feature", "properties": { "insee_reg": "52", "cheflieu_reg": "44109", "iso_reg": "FR-PDL", "lib_com": "Nantes", "lib_com_carto": "Nantes", "iso_territoire_2": "FR" }, "geometry": { "type": "Point", "coordinates": [ -1.547938166108069, 47.232396443118333 ] } },
+{ "type": "Feature", "properties": { "insee_reg": "53", "cheflieu_reg": "35238", "iso_reg": "FR-BRE", "lib_com": "Rennes", "lib_com_carto": "Rennes", "iso_territoire_2": "FR" }, "geometry": { "type": "Point", "coordinates": [ -1.68226423392737, 48.111188530059238 ] } },
+{ "type": "Feature", "properties": { "insee_reg": "75", "cheflieu_reg": "33063", "iso_reg": "FR-NAQ", "lib_com": "Bordeaux", "lib_com_carto": "Bordeaux", "iso_territoire_2": "FR" }, "geometry": { "type": "Point", "coordinates": [ -0.573551409837515, 44.857533292933283 ] } },
+{ "type": "Feature", "properties": { "insee_reg": "76", "cheflieu_reg": "31555", "iso_reg": "FR-OCC", "lib_com": "Toulouse", "lib_com_carto": "Toulouse", "iso_territoire_2": "FR" }, "geometry": { "type": "Point", "coordinates": [ 1.432076721828547, 43.596007708202308 ] } },
+{ "type": "Feature", "properties": { "insee_reg": "84", "cheflieu_reg": "69123", "iso_reg": "FR-ARA", "lib_com": "Lyon", "lib_com_carto": "Lyon", "iso_territoire_2": "FR" }, "geometry": { "type": "Point", "coordinates": [ 4.836025833561583, 45.755136361612827 ] } },
+{ "type": "Feature", "properties": { "insee_reg": "93", "cheflieu_reg": "13055", "iso_reg": "FR-PAC", "lib_com": "Marseille", "lib_com_carto": "Marseille", "iso_territoire_2": "FR" }, "geometry": { "type": "Point", "coordinates": [ 5.422469565379018, 43.292521153119424 ] } },
+{ "type": "Feature", "properties": { "insee_reg": "94", "cheflieu_reg": "2A004", "iso_reg": "FR-20R", "lib_com": "Ajaccio", "lib_com_carto": "Ajaccio", "iso_territoire_2": "FR" }, "geometry": { "type": "Point", "coordinates": [ 8.702231982531721, 41.935151220449477 ] } }
+]
+}

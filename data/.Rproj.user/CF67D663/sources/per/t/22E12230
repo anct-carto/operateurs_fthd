@@ -1,0 +1,26 @@
+{
+    "id": "22E12230",
+    "path": "N:/DST/Carto/INTERACTIVITE/fthd_operateurs/data/projet/1-transformation_format_data.R",
+    "project_path": "projet/1-transformation_format_data.R",
+    "type": "r_source",
+    "hash": "1576892",
+    "contents": "",
+    "dirty": false,
+    "created": 1707318650046.0,
+    "source_on_save": false,
+    "relative_order": 5,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "54,29",
+        "scrollLine": "43"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1707730484,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1707730484863,
+    "read_only": false,
+    "read_only_alternatives": []
+}

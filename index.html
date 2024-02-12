@@ -1,0 +1,176 @@
+<!DOCTYPE html> 
+<html lang="fr" dir="ltr">
+
+<head>
+  <meta charset="utf-8" /> 
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/ico"/>
+  <title> Opérateurs partenaires - France très haut débit</title> 
+
+<!------------------------------------------------------>
+<!--Installation des librairies necessaires au projet -->
+<!------------------------------------------------------>
+  <!--Leaflet-->
+  <link rel="stylesheet" href="lib/leaflet.css"/>
+  <link rel="stylesheet" href="lib/leaflet-sidebar-v2/css/leaflet-sidebar.min.css"/> 
+  <link href="lib/bootstrap-5.2.0-dist/css/bootstrap.min.css" rel="stylesheet"> 
+ <!-- Leaflet.popup CSS -->
+ <link rel="stylesheet" href="lib/leaflet.pm/dist/leaflet.pm.css" />
+ <!--leaflet etiquettes-->
+ <link rel="stylesheet" href="lib/leaflet.label.css" />
+
+  <!-- Leaflet.awesome-markers CSS -->
+  <link rel="stylesheet" href="lib/leaflet.awesome-markers/dist/leaflet.awesome-markers.css" />
+
+  <!-- Line-awesome (picto)-->
+  <link rel="stylesheet" href= "lib/line-awesome-1.3.0/css/line-awesome.min.css"> 
+  <!--Leaflet extension-->
+  <link rel="stylesheet" href="lib/leaflet-search/dist/leaflet-search.min.css" />
+
+
+
+  <!--Leaflet-->
+  <script src="lib/leaflet.js"></script>
+  <!--Leaflet extension-->
+  <script src="lib/leaflet-search/dist/leaflet-search.min.js"></script>
+  <script src="lib/leaflet-sidebar-v2/js/leaflet-sidebar.min.js"></script>
+  <!-- Leaflet.awesome-markers JavaScript -->
+  <script src="lib/leaflet.awesome-markers/dist/leaflet.awesome-markers.min.js"></script>
+ <!--leaflet etiquettes-->
+  <script rel="stylesheet" href="lib/leaflet.label.js"></script> 
+
+  <!-- Leaflet.popup JavaScript -->
+  <script src="lib/leaflet.pm/dist/leaflet.pm.min.js"></script>
+
+  <script src="lib/bootstrap-5.2.0-dist/js/bootstrap.bundle.min.js"></script>
+  <script src="lib/jquery/dist/jquery.min.js"></script>
+  
+  <!--Style sheets-->
+  <link rel="stylesheet" href="css/font.css">
+  <link rel="stylesheet" href="css/style.css" defer >    
+
+</head>
+
+<body>
+  <!--ajout de la div map-->
+  <div id="map"></div>
+  <!-- <div id="search-container">
+    <input type="text" id="search-input" placeholder="Rechercher un département" />
+  </div> -->
+
+  <!--Sidebar-->
+  <div id="sidebar" class="leaflet-sidebar ">
+    <!--Ici: les boutons du sidebar-->
+    <div class="leaflet-sidebar-tabs">
+      <ul role="tablist">
+        <li><a href="#home" role="tab" class="sidebar-button"><i class="las la-home"></i><span class="tab-name">Accueil</span></a></li>
+        <li><a href="#a-propos" role="tab" class="sidebar-button"><i class="las la-info-circle"></i><span class="tab-name">À propos</span></a></li>
+        <li id="operateur-tab" class="hidden"><a href="#operateur" role="tab" class="sidebar-button"><i class="las la-desktop"></i><span class="tab-name">À propos</span></a></li>
+
+      </ul>
+    </div>
+    <div class="leaflet-sidebar-content">
+
+      <div class="leaflet-sidebar-pane" id="home">
+        <!--Panneau 1-->
+        <div class="leaflet-sidebar-header">
+          <a href="https://agence-cohesion-territoires.gouv.fr/" target="_blank">
+            <img id="logo" src="img/logo_fthd_anct.jpg" class="logo-anct-marianne-fthd" width="90%">
+          </a>
+          <h4 class="titre-sidebar">Les opérateurs partenaires <br> France Très Haut Débit</h4>
+          <span class="leaflet-sidebar-close" @click="sidebar.close()">
+            <i class="la la-step-backward"></i>
+          </span>
+        </div>
+        <div class="panel-content">
+          <div class="text-anct">
+            <p>
+            Des opérateurs locaux et nationaux proposent des offres labellisées « Cohésion Numérique » permettant l’accès à un internet fixe de qualité.
+            Sélectionnez votre département sur la carte, ou renseignez-le dans la barre de recherche, pour connaître les opérateurs labellisés proposant des solutions chez vous.
+            Choisissez et contactez l’opérateur proposant la solution qui vous semble la plus adaptée à votre situation. 
+            Cette carte présente la liste des opérateurs labellisés, <b>et seul l’opérateur peut vous confirmer votre éligibilité aux offres labellisés</b>.
+            Vous bénéficierez alors de l'aide de l'État sur votre première facture pour les frais d’équipement, d’installation ou de mise en service. 
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <!--Panneau 2-->
+      <div class="leaflet-sidebar-pane" id="a-propos">
+        <div class="leaflet-sidebar-header">
+          <a href="https://agence-cohesion-territoires.gouv.fr/" target="_blank">
+            <img id="logo" src="img/logo_fthd_anct.jpg" class="logo-anct-marianne-fthd" width="90%">
+          </a>
+          <h4 class="titre-sidebar">À propos</h4>
+          <span class="leaflet-sidebar-close" @click="sidebar.close()">
+            <i class="la la-step-backward"></i>
+          </span>
+        </div>
+        <div class="panel-content">
+          <div class="text-anct">
+            <p>Agence de l’État créée en 2020, l’Agence nationale de la cohésion des territoires (ANCT) assure un rôle de « fabrique à projets » pour permettre aux collectivités de mener à bien leurs projets ; facilite l’accès des collectivités locales aux ressources nécessaires pour les concrétiser (ingénierie technique et financière, partenariats, subventions…) ; prend en compte les différences entre les territoires et adapte son action à leurs besoins.</p>
+            <p>Le Plan France Très Haut débit fixe des objectifs ambitieux pour la couverture en internet fixe des Français.
+              Ce plan associe plusieurs dynamiques complémentaires : 
+              d’une part, celle de l’initiative privée des opérateurs de communications électroniques dans les principales agglomérations et leurs périphéries
+              (zone d’initiative privée) et d’autre part, celle de l’initiative publique portée par les collectivités territoriales
+              (zone d’initiative publique) dans les zones les plus rurales.</p>
+            <p>Pour plus d'informations, vous pouvez nous contacter :
+              <a href="fthd@anct.gouv.fr" target="_blank">fthd@anct.gouv.fr</a>
+            <br><br></p>
+            <span class="text-anct-petit"><b>Réalisation :</b>
+              <p>Pôle analyse & diagnostics territoriaux - Cartographie - ANCT <br>           
+                  Pour toutes questions, veuillez contacter :
+                <a href="cartographie@anct.gouv.fr" target="_blank">cartographie@anct.gouv.fr</a>
+              </p>
+            </span>
+            
+            <span class="text-anct-petit"><b>Technologies :</b> 
+              <p>Leaflet 1.9.4, Bootstrap 5.2, Line-awesome 1.3.0
+                Le code source de cet outil est consultable sur 
+                <a href="https://github.com/anct-carto/superposeur-anct" target="_blank">Github</a>
+                  .
+                </p>
+            </span>
+    
+          </div>
+        </div>
+      </div>
+      <!--Panneau 3 - Opérateur -->
+      <!-- voir si on laisse cette classe qui ouvre un onglet sans icone -->
+      <div class="leaflet-sidebar-pane" id="operateur">
+        <div class="leaflet-sidebar-header">
+          <img src="img/logo_fthd_anct.jpg" alt="LOGO-ANCT" class="logo-anct-marianne-fthd">
+          <span class="leaflet-sidebar-close" @click="sidebar.close()">
+            <i class="la la-step-backward"></i>
+          </span>
+        </div>
+      </div>
+      <div class="leaflet-sidebar-pane hidden" id="operateur">
+        <div class="panel-content">
+          <div id= "card">
+                          
+            <div class="card-header" ></div>
+            <div class="card-body">
+              <ul class="liste-operateurs" role="tablist"></ul>
+              <button id="bnt-retour-liste" ><i class="las la-arrow-circle-left"></i> Retour à la liste d'opérateur</button>
+              <div id="operateur-content"></div>
+              <button id="bnt-operateur" ><i class="las la-arrow-circle-down"></i> Plus d'informations sur les opérateurs </button>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    
+    </div>
+
+
+
+        
+
+
+
+  <script src="src/app.js"></script> 
+</body>
+</html>
+   

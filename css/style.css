@@ -1,0 +1,217 @@
+/* -------------- */
+/* STYLE GENERAL */
+/* ------------ */
+
+/*style de base pour le code*/
+html, body {
+    height: 100%;
+	width:  100%;
+	margin : 0 auto;
+    position: absolute;
+    font-family: 'Marianne-regular', Arial, Helvetica, sans-serif;
+    background-color: white;
+}
+
+#map {
+    height: 100%; 
+    width: 100%; 
+    background-color: white;
+}
+
+
+/* -------------------------------------------------------------------------- */
+/*                                    SIDEBAR                                 */
+/* -------------------------------------------------------------------------- */
+/* --------------- */
+/* TEXTE SIDEBAR */
+/* ------------ */
+
+.text-anct {
+	font-family: 'Marianne-regular', sans-serif;
+	font-size: 13px;
+	text-align: justify;
+	padding-left: 5px;
+	padding-right: 15px;
+	line-height: 1.7;
+
+}
+.text-anct-petit {
+	font-family: 'Marianne-regular', sans-serif;
+	font-size: 11px;
+	text-align: justify;
+	padding-left: 5px;
+	padding-right: 15px;
+	line-height: 1;
+
+}
+
+.titre-sidebar {
+    color: #e62d3c; 
+    font-weight: bold; 
+    font-size: 18px; 
+	text-align: left;
+	margin-bottom: 50px;
+}
+
+/* --------------- */
+/* FORMAT SIDEBAR */
+/* ------------- */
+
+#sidebar {
+	position: absolute;
+	background-color: white;
+}
+
+
+#sidebar .leaflet-sidebar-close{
+	position:absolute;
+	top:0;
+    width: 40px !important;
+    height: 40px !important;
+	text-align:center;
+	cursor:pointer;
+}
+#sidebar .leaflet-sidebar-left .leaflet-sidebar-close{right:0}
+#sidebar .leaflet-sidebar-right .leaflet-sidebar-close{left:0}
+
+/*bar tabs*/
+.leaflet-sidebar-tabs {
+	background-color: #244a9a;
+	background: linear-gradient(180deg, #244a9a 0%, #bfd0ff 100%);
+	box-shadow: 2px 0px 2px 0px #656565;
+}
+
+.leaflet-sidebar-tabs > ul > li {
+	color: white; /* couleur des logos au click*/
+}
+
+/*changment de couleur quand clic*/
+.leaflet-sidebar-tabs > ul > li.active, .leaflet-sidebar-tabs > ul > li.active:hover {
+	background-color: rgb(249, 249, 251);
+	color: #244a9a; /*logo accueil sidebar*/
+	border-left: solid 3px #e62d3c;
+}
+
+.tab-name {
+	position: absolute;
+	display: none;
+	z-index: 10000;
+	left: 50px;
+	background: rgba(0,0,0,.8) !important;
+}
+
+
+.leaflet-sidebar-header {
+	display: flex;
+	margin: 0px 10px 0px 5px;
+	justify-content: space-between; 
+	padding:0px 10px 0px 5px;
+	font-family: 'Marianne', sans-serif;
+	text-transform: uppercase;
+	height: auto;
+	color: #244a9a; /*couleur du bouton réduire sidebar*/
+	flex-direction: column;
+	background-color: white;
+}
+
+.leaflet-sidebar-pane{
+	padding:0px 0px 0px 5px;
+}
+ 
+.logo-anct-marianne-fthd {
+    width : 90%;
+    max-width: 100%;
+    height: auto;
+	margin-top: 20px;
+    margin-bottom: 50px;
+	padding-right: 10px;
+	padding-left: 10px;
+    transition: width 0.3s;
+}  
+
+/* --------------- */
+/* SIDEBAR CONTENT*/
+/* ------------- */
+
+/* logo des opérateurs  */
+.operator-logo {
+	width: auto;
+	height: auto;
+	padding-bottom: 7px;
+	padding-top: 7px;
+}
+
+/* lib_dep affiché */
+.dep-txt-sidebar{
+	font-family: 'Marianne', sans-serif;
+    font-size: 21px;
+    font-weight: bold;
+    color: #398373;
+	text-transform: uppercase; /* Convertit le texte en majuscules */
+	margin-bottom: 10px;
+
+	
+}
+
+/* Liste des opérateurs par dep */
+.operator-list {
+    margin: 10px;
+    padding: 5px; /* Espacement interne */
+    font-family: 'Marianne', sans-serif; /* Police de caractères Marianne */
+    font-size: 14px; /* Taille de police */
+    color: #000; /* Couleur du texte noire */
+	line-height: 3;
+}
+
+/* Texte informations sur les opérateurs */
+.operator-content{
+	font-family: 'Marianne', sans-serif;
+	font-size: 12px;
+	color : #000;
+	padding : 5px;
+}
+
+/* Separateur entre bloc de txt */
+.box {
+    border: 1px dashed darkgray; /* Ajoute une bordure autour de chaque boîte */
+    margin-bottom: 5px; /* Ajoute de l'espace en bas de chaque boîte */
+}
+
+/* --------------- */
+/* BOUTON SIDEBAR */
+/* ------------- */
+#bnt-operateur{
+	font-family: "Marianne", sans-serif; 
+	font-size: 12px; /* Taille de police 10 pixels */
+	font-weight: 300;
+	border-radius: 4px; /* Bords arrondis */
+	background-color: #398373; /* Fond bleu */
+	color: white; /* Texte en blanc */
+	padding: 5px 5px; /* Marge interne pour un meilleur aspect */
+	cursor: pointer; /* Curseur en main pour indiquer un bouton cliquable */
+	display: none;
+	border:none;
+}
+
+#bnt-operateur i {
+    font-size: 18px; /* Changer la taille de police de l'icône  */
+}
+
+#liste-operateurs{
+	display: none;
+}
+
+#bnt-retour-liste{
+	font-family: "Marianne", sans-serif; /* Utilise la police Marianne ou une police sans-serif de secours */
+	font-size: 12px; /* Taille de police 10 pixels */
+	font-weight: 400;
+	border-radius: 4px; /* Bords arrondis */
+	background-color: #398373; /* Fond bleu */
+	color: white; /* Texte en blanc */
+	padding: 5px 10px; /* Marge interne pour un meilleur aspect */
+	cursor: pointer; /* Curseur en main pour indiquer un bouton cliquable */
+	display: none;
+	margin-bottom: 10px;
+	border:none;
+}
+
