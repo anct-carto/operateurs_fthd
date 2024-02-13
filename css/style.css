@@ -13,12 +13,20 @@ html, body {
 }
 
 #map {
-    height: 100%; 
+	position : absolute;
+	
     width: 100%; 
-    background-color:white;
+	height: 100%; 
+    background-color:#E6F5FF;
 }
 
-
+.etiquette-outreMer{
+	font-family: 'Marianne', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: #e62d3c;
+	text-transform: uppercase; /* Convertit le texte en majuscules */
+}
 /* -------------------------------------------------------------------------- */
 /*                                    SIDEBAR                                 */
 /* -------------------------------------------------------------------------- */
@@ -50,6 +58,24 @@ html, body {
 	margin-bottom: 30px;
 }
 
+
+
+
+#search-container {
+	position: absolute;
+	top: 10px; /* Ajustez la distance depuis le haut selon vos besoins */
+	right: 10px; /* Ajustez la distance depuis la droite selon vos besoins */
+	z-index: 1000; /* Assure que la barre de recherche est au-dessus des autres éléments si nécessaire */
+  }
+  
+  #search-input {
+	width: 200px; /* Ajustez la largeur selon vos besoins */
+	padding: 5px; /* Ajustez le rembourrage selon vos besoins */
+	border: 1px solid #ccc; /* Ajustez le style de la bordure selon vos besoins */
+	border-radius: 5px; /* Ajustez le rayon de la bordure selon vos besoins */
+  }
+  
+
 /* --------------- */
 /* FORMAT SIDEBAR */
 /* ------------- */
@@ -57,6 +83,7 @@ html, body {
 #sidebar {
 	position: absolute;
 	background-color: white;
+	margin-right : 5px;
 }
 
 
@@ -153,13 +180,23 @@ html, body {
     color: #398373;
 	padding : 0px;
 	text-transform: uppercase; /* Convertit le texte en majuscules */
-	margin-bottom: 10px;
-	padding: 10px px 5px 5px;
+	margin-bottom: 5px;
+	padding: 10px 5px 5px 5px;
 
 	
 }
 
 /* Liste des opérateurs par dep */
+.titre-liste-operateurs {
+	margin: 10px;
+    padding:  5px  5px  5px 10px; /* Espacement interne */
+    font-family: 'Marianne', sans-serif; /* Police de caractères Marianne */
+    font-size: 18px; /* Taille de police */
+	font-weight: bold;
+    color: #000; /* Couleur du texte noire */
+	line-height: 1;
+}
+
 .operator-list {
     margin: 10px;
     padding:  5px  5px  5px 30px; /* Espacement interne */
@@ -221,3 +258,15 @@ html, body {
 	border:none;
 }
 
+#bnt-site-fthd {
+	font-family: "Marianne", sans-serif; /* Utilise la police Marianne ou une police sans-serif de secours */
+	font-size: 12px; /* Taille de police 10 pixels */
+	font-weight: 400;
+	border-radius: 4px; /* Bords arrondis */
+	background-color: #398373; /* Fond bleu */
+	color: white; /* Texte en blanc */
+	padding: 5px 10px; /* Marge interne pour un meilleur aspect */
+	cursor: pointer; /* Curseur en main pour indiquer un bouton cliquable */
+	margin-bottom: 10px;
+	border:none;
+}

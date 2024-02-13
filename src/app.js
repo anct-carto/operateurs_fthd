@@ -41,18 +41,31 @@ function operateurInfo(feature) {
     }
 }
 
+  // Appeler la fonction pour ajouter le titre au chargement de la page
+  
 //Liste des opérateurs partenaires pour chaque DEP
 function createListOperateur(feature){
     const listOperateurs = document.querySelector(".liste-operateurs");
     listOperateurs.classList.add("operator-list");
 
+    // Récupérer la valeur de la première colonne des opérateurs
+    const operateur1Value = feature.properties['opérateur1'];
+
+    // Vérifier si la valeur est différente de "blabla"
+    if (operateur1Value !== "Le territoire ne possède actuellement pas d'offre de nos partenaires.") {
+        // Ajouter le titre "Liste des opérateurs partenaires"
+        const titreElement = document.createElement('div');
+        titreElement.classList.add('nav-item', 'titre-liste-operateurs');
+        titreElement.textContent = 'Liste des opérateurs partenaires';
+        listOperateurs.appendChild(titreElement);
+    }
 
     // Boucle pour ajouter chaque opérateur
     for (let i = 1; i <= 7; i++) {
         const operateurKey = 'opérateur' + i;
         const operateurValue = feature.properties[operateurKey];
 
-        // Vérification si la valeur de l'opérateur n'est pas null
+        // Vérification si la valeur de l'opérateur n'est pas null et différente de "blabla"
         if (operateurValue !== null && operateurValue !== undefined) {
             // Ajout d'un élément de liste à la liste
             const listItem = document.createElement('li');
@@ -65,8 +78,11 @@ function createListOperateur(feature){
             listOperateurs.appendChild(listItem);
         }
     }  
-    
 };
+
+
+
+
 
 // Création du contenu de la sidebar
 function createSidebarContent(feature) {
@@ -90,7 +106,6 @@ function createSidebarContent(feature) {
 
     // Récupérer le titre : nom du département séléctionné
     cardHeader.innerHTML = '<div id="nom-programme" ><span><p class="dep-txt-sidebar">' + dataInfos[`dep`] + '</p></span></div>';
-
     createListOperateur(feature);
     operateurInfo(feature);
     if (dataInfos['opérateur1'] !== "Le territoire ne possède actuellement pas d'offre de nos partenaires.") {
@@ -122,9 +137,9 @@ function createSidebarContent(feature) {
 }
 
 
-///////////////////////////////
-// CREATION FICHIERS GEO     //
-///////////////////////////////
+/* ------------------------- */
+/*  CREATION FICHIERS GEO   */
+/* ----------------------- */
 
 // Chargement des données 
 async function loadData(chemin) {
@@ -141,7 +156,7 @@ function createGeoJSON(data, map) {
         style: {
             color: 'white',
             weight: 1,
-            fillColor: '#e8ded2',
+            fillColor: '#244a9a', //bleu
             fillOpacity: 1,
             opacity: 1
         },
@@ -151,7 +166,7 @@ function createGeoJSON(data, map) {
                     // Réinitialiser le style du département précédemment sélectionné
                     if (selectedDepartment) {
                         selectedDepartment.setStyle({
-                            fillColor: '#e8ded2',
+                            fillColor: '#244a9a', //bleu
                             weight: 1
                         });
                     }
@@ -159,7 +174,7 @@ function createGeoJSON(data, map) {
                     // Appliquer le style au nouveau département
                     layer.setStyle({
                         color: 'white',
-                        fillColor: '#313778',
+                        fillColor: '#e62d3c', //rouge
                         fillOpacity: 1,
                         weight: 2
                     });
@@ -184,7 +199,7 @@ function createGeoJSON(data, map) {
 function createGeoJSONHab(data, map) {
     new L.geoJSON(data, {
         style: {
-            color: '#313778',
+            color: '#e62d3c', //rouge
             weight: 1,
             fillOpacity: 1
         },
@@ -195,7 +210,7 @@ function createGeoJSONHab(data, map) {
 function createGeoJSONHabBis(data, map) {
     new L.geoJSON(data, {
         style: {
-            color: '#F2E8DC',
+            color: '#F2E8DC', //beige 
             weight: 1,
             fillOpacity:1,
         },
@@ -207,7 +222,7 @@ function handleMouseOver(e) {
     if (selectedDepartment !== this) {
         this.setStyle({
             color: 'white',
-            fillColor: '#313778',
+            fillColor: '#e62d3c', //rouge
             fillOpacity: 1,
             weight: 2
         });
@@ -217,7 +232,7 @@ function handleMouseOver(e) {
 function handleMouseOut(e) {
     if (selectedDepartment !== this) {
         this.setStyle({
-            fillColor: '#e8ded2',
+            fillColor: '#244a9a', //bleu 
             weight: 1
         });
     }
@@ -229,7 +244,7 @@ function resetDepStyles(depLayerResetStyle) {
         layer.setStyle({
             color: 'white',
             weight: 1,
-            fillColor: '#e8ded2',
+            fillColor: '#244a9a', //bleu
             fillOpacity: 1,
             opacity: 1
         });
@@ -239,7 +254,7 @@ function resetDepStyles(depLayerResetStyle) {
         selectedDepartment.setStyle({
             color: 'white',
             weight: 1,
-            fillColor: '#e8ded2',
+            fillColor: '#244a9a', //bleu
             fillOpacity: 1,
             opacity: 1
         });
@@ -248,39 +263,30 @@ function resetDepStyles(depLayerResetStyle) {
 
 //Creation de la searchBar
 function createSearchBar(data, map){
-    //Ajour d'une barre de recherche par département
     var searchControl = new L.Control.Search({
         layer: data,
         propertyName: 'dep',
         marker: false,
         textPlaceholder: 'Rechercher un département',
-        position: 'topleft'
+        position: 'topright',
+        collapsed : false,
+        zoom: 12
     });
-
-    searchControl.on('search:collapsed', function () {
-        resetDepStyles(data);
-    });
-
     //Au résultat, on zoom sur les limites du départements recherché puis on y applique le style du departement sélectionné
     searchControl.on('search:locationfound', function (e) {
-
         var selectedFeature = e.layer;
-
         // Réinitialiser le style des départements précédemment sélectionnés
         resetDepStyles(data);
-
         // Appliquer le nouveau style au département sélectionné
         selectedFeature.setStyle({
             color: 'white',
-            fillColor: '#313778',
+            fillColor: '#e62d3C', //rouge
             fillOpacity: 1,
             weight: 1
         });        
         selectedFeature.fire('click');
-
     });
-
-    //Ajouter le controle de la search bar sur la carte
+    //Ajout barre de recherche
     map.addControl(searchControl);
 
 }
@@ -292,14 +298,30 @@ function createSearchBar(data, map){
 /* --------------- */
 /*     CARTE      */
 /* -------------- */
-var mymap = L.map('map');
-mymap.attributionControl.addAttribution('Licensed by © <a href="some_link", class="your_class">Habijabi</a>');
+var mymap = L.map('map').setView([46.603354, 0.10000],6);
+mymap.attributionControl.addAttribution('<a href="https://agence-cohesion-territoires.gouv.fr/" target="_blank">ANCT 2023</a> | <a href="https://www.ign.fr/institut/ressources-pedagogiques" target="_blank">Fond cartographique IGN</a>');
 
-mymap.dragging.disable();
+mymap.dragging.disable(); // empeche le déplacement libre sur l'emprise de la carte 
 
 //Niveau de zoom : Min & Max
 mymap.setMinZoom(5);
 mymap.setMaxZoom(7);
+//EMPRISE MAX CARTE 
+var bounds = L.latLngBounds(
+    L.latLng(41.5, -10),   // Coin en bas à gauche de l'emprise
+    L.latLng(51.5, )     // Coin en haut à droite de l'emprise
+);
+mymap.setMaxBounds(bounds);
+mymap.on('drag', function () {
+    mymap.panInsideBounds(bounds, { animate: false });
+});
+
+// ETIQUETTE TERRITOIRES ULTRAMARINS
+const titleCoordinates = [47.70000, -6.3000]; //Position de l'étiquette
+const titleText = "Les territoires ultramarins";
+const titleMarker = L.marker(titleCoordinates, { icon: L.divIcon({ className: 'etiquette-outreMer', html: titleText }) });
+titleMarker.addTo(mymap);
+
 
 /* --------------- */
 /*    SIDEBAR      */
@@ -330,37 +352,32 @@ sidebar.on('content', function (ev) {
 sidebar.addTo(mymap);
 sidebar.open('home');
 
-/* -------------------------------- */
-/*        COUCHES DE DONNNEES       */
-/* -------------------------------- */
+/* --------------- */
+/*    AJOUT       */
+/*  DES DONNEES  */
+/* ------------ */
 //chargement des données des départements métropole+drom
 const fthdInit = loadData("data/geom/data_dep.geojson");
 
-// // Ajout d'une nouvelle couches d'habillages
+// // Ajout couches d'habillage
 const contoursIleReprojete = loadData("data/geom/contours_iles_reprojetees.geojson");
 const territoiresFrontaliers= loadData("data/geom/territoires_frontaliers.geojson");
-// const habGuyane= loadData("data/geom/habillage_guyane.geojson");
+const habGuyane= loadData("data/geom/habillage_guyane.geojson");
 
-
-// Création couches contours DROM COM 
-Promise.all([contoursIleReprojete]).then(([contoursIleReprojeteLayer]) => {
-    createGeoJSONHab(contoursIleReprojeteLayer, mymap);
-});
-// Création couche territoires frontaliers 
-Promise.all([territoiresFrontaliers]).then(([territoiresFrontaliersLayer]) => {
+// Création couches
+Promise.all([fthdInit, contoursIleReprojete, territoiresFrontaliers, habGuyane]).then(([fthdLayer, contoursIleReprojeteLayer, territoiresFrontaliersLayer, habGuyaneLayer]) => {
     createGeoJSONHabBis(territoiresFrontaliersLayer, mymap);
+    createGeoJSONHabBis(habGuyaneLayer, mymap);
+    createGeoJSONHab(contoursIleReprojeteLayer, mymap);
 
-});
 
-
-// Création couche principale
-Promise.all([fthdInit]).then(([fthdLayer]) => {
     const fthdData = createGeoJSON(fthdLayer, mymap);
     const bounds = fthdData.getBounds();
-    mymap.fitBounds(bounds, { padding: [50, 50] });
+    // mymap.fitBounds(bounds, { padding: [70, 70] });
 
     // Barre de recherche
     createSearchBar(fthdData, mymap);
+    
 
     // Réinitialisation du style de département au clic sur un bouton de la sidebar
     const sidebarTabs = document.querySelector('.leaflet-sidebar-tabs');
@@ -368,12 +385,7 @@ Promise.all([fthdInit]).then(([fthdLayer]) => {
         sidebarTabs.addEventListener('click', function (event) {
             if (event.target.classList.contains('sidebar-button')) {
                 resetDepStyles(fthdData);
-                // Autres actions à effectuer lors du clic sur un élément de la classe sidebar-button
             }
         });
     }
 });
-
-
-
-
