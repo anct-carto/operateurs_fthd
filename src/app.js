@@ -80,10 +80,6 @@ function createListOperateur(feature){
     }  
 };
 
-
-
-
-
 // Création du contenu de la sidebar
 function createSidebarContent(feature) {
     
@@ -135,7 +131,6 @@ function createSidebarContent(feature) {
     
     return listOperateurs;
 }
-
 
 /* ------------------------- */
 /*  CREATION FICHIERS GEO   */
@@ -234,7 +229,7 @@ function handleMouseOut(e) {
         this.setStyle({
             fillColor: '#244a9a', //bleu 
             weight: 1
-        });
+        })
     }
 }
 
@@ -261,7 +256,7 @@ function resetDepStyles(depLayerResetStyle) {
     }
 }
 
-//Creation de la searchBar
+//Creation de la barre de recherche
 function createSearchBar(data, map){
     var searchControl = new L.Control.Search({
         layer: data,
@@ -291,6 +286,18 @@ function createSearchBar(data, map){
 
 }
 
+//Calcul emprise carte selon taille de l'écran 
+function calculateBounds() {
+    var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    var height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+
+    var bounds = L.latLngBounds(
+        mymap.containerPointToLatLng([0, 0]),
+        mymap.containerPointToLatLng([width, height])
+    );
+
+    return bounds;
+}
 /* -------------------------------------------------------------------------- */
 /*                        CREATION OBJETS PRINCIPAUX                          */
 /* -------------------------------------------------------------------------- */
@@ -298,29 +305,33 @@ function createSearchBar(data, map){
 /* --------------- */
 /*     CARTE      */
 /* -------------- */
-var mymap = L.map('map').setView([46.603354, 0.10000],6);
+var mymap = L.map('map').setView([46.603354, 0.10000],5);
+
+// Mise à jour de l'emprise maximale lors du redimensionnement de la fenêtre
+window.addEventListener('resize', function () {
+    mymap.setMaxBounds(calculateBounds());
+    mymap.panInsideBounds(calculateBounds(), { animate: false });
+});
+// Initialisation de l'emprise maximale
+mymap.setMaxBounds(calculateBounds());
+mymap.panInsideBounds(calculateBounds(), { animate: false });
+
+//Sources en bas à droite 
 mymap.attributionControl.addAttribution('<a href="https://agence-cohesion-territoires.gouv.fr/" target="_blank">ANCT 2023</a> | <a href="https://www.ign.fr/institut/ressources-pedagogiques" target="_blank">Fond cartographique IGN</a>');
 
 mymap.dragging.disable(); // empeche le déplacement libre sur l'emprise de la carte 
 
 //Niveau de zoom : Min & Max
-mymap.setMinZoom(5);
+mymap.setMinZoom(4);
 mymap.setMaxZoom(7);
-//EMPRISE MAX CARTE 
-var bounds = L.latLngBounds(
-    L.latLng(41.5, -10),   // Coin en bas à gauche de l'emprise
-    L.latLng(51.5, )     // Coin en haut à droite de l'emprise
-);
-mymap.setMaxBounds(bounds);
-mymap.on('drag', function () {
-    mymap.panInsideBounds(bounds, { animate: false });
-});
 
-// ETIQUETTE TERRITOIRES ULTRAMARINS
-const titleCoordinates = [47.70000, -6.3000]; //Position de l'étiquette
+
+// ETIQUETTE FIXE TERRITOIRES ULTRAMARINS
+const titleCoordinates = [47.80000, -6.3000]; //Position de l'étiquette
 const titleText = "Les territoires ultramarins";
 const titleMarker = L.marker(titleCoordinates, { icon: L.divIcon({ className: 'etiquette-outreMer', html: titleText }) });
 titleMarker.addTo(mymap);
+
 
 
 /* --------------- */
@@ -358,8 +369,7 @@ sidebar.open('home');
 /* ------------ */
 //chargement des données des départements métropole+drom
 const fthdInit = loadData("data/geom/data_dep.geojson");
-
-// // Ajout couches d'habillage
+// Ajout couches d'habillage
 const contoursIleReprojete = loadData("data/geom/contours_iles_reprojetees.geojson");
 const territoiresFrontaliers= loadData("data/geom/territoires_frontaliers.geojson");
 const habGuyane= loadData("data/geom/habillage_guyane.geojson");
@@ -370,10 +380,9 @@ Promise.all([fthdInit, contoursIleReprojete, territoiresFrontaliers, habGuyane])
     createGeoJSONHabBis(habGuyaneLayer, mymap);
     createGeoJSONHab(contoursIleReprojeteLayer, mymap);
 
-
     const fthdData = createGeoJSON(fthdLayer, mymap);
     const bounds = fthdData.getBounds();
-    // mymap.fitBounds(bounds, { padding: [70, 70] });
+    mymap.fitBounds(bounds, { padding: [50, 50] });
 
     // Barre de recherche
     createSearchBar(fthdData, mymap);

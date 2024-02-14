@@ -43,6 +43,7 @@ ter_front<-st_transform(ter_front_init, crs=st_crs(4326))
 
 hab_guyane<-st_transform(hab_guyane_init, crs=st_crs(4326))
 
+
 #Creation d'une nouvelle couche qui contient tous les departements et les iles du programme
 geom_st_martin<- st_martin%>%
   summarise(insee_dep="978", insee_reg="", geometry = st_union(geom))
