@@ -213,37 +213,27 @@ html, body {
 	padding : 5px;
 }
 
-/* Separateur entre bloc de txt */
-.box {
-    border: 1px dashed darkgray; /* Ajoute une bordure autour de chaque boîte */
-    margin-bottom: 5px; /* Ajoute de l'espace en bas de chaque boîte */
+.operator-separateur {
+    border-top: 1px dashed darkgray; /* Ligne pointillée en bas de chaque élément de la liste */
+    padding-bottom: 10px; /* Espace en bas de chaque élément de la liste */
+    margin-bottom: 10px; /* Espace entre les éléments de la liste */
 }
+
+.no-offer-message{
+	font-family: 'Marianne', sans-serif;
+	font-size: 14px;
+	color : #000;
+	padding : 10px;
+}
+
+
 
 /* --------------- */
 /* BOUTON SIDEBAR */
 /* ------------- */
-#bnt-operateur{
-	font-family: "Marianne", sans-serif; 
-	font-size: 12px; /* Taille de police 10 pixels */
-	font-weight: 300;
-	border-radius: 4px; /* Bords arrondis */
-	background-color: #398373; /* Fond bleu */
-	color: white; /* Texte en blanc */
-	padding: 5px 5px; /* Marge interne pour un meilleur aspect */
-	cursor: pointer; /* Curseur en main pour indiquer un bouton cliquable */
-	display: none;
-	border:none;
-}
 
-#bnt-operateur i {
-    font-size: 18px; /* Changer la taille de police de l'icône  */
-}
 
-#liste-operateurs{
-	display: none;
-}
-
-#bnt-retour-liste{
+#bnt-retour-accueil{
 	font-family: "Marianne", sans-serif; /* Utilise la police Marianne ou une police sans-serif de secours */
 	font-size: 12px; /* Taille de police 10 pixels */
 	font-weight: 400;

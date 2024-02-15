@@ -9,13 +9,55 @@ function breakLines(text, charactersPerLine) {
 }
 
 // Détails des infos sur les opérateurs
+// function operateurInfo(feature) {
+//     const operateurContent = document.getElementById("operateur-content");
+//     const dataInfos = feature.properties;
+//     operateurContent.classList.add("operator-content"); // permet de définir le style en CSS 
+//     const noOfferMessage = "Le territoire ne possède actuellement pas d'offre de nos partenaires.";
+
+//     if (dataInfos['opérateur1'] !== noOfferMessage) { //Si la valeur de l'opérateur1 mentionne qu'il n'y a pas de partenaires, alors on affiche pas de contenu.
+//         for (let i = 1; i <= 7; i++) {
+//             const operateurKey = 'opérateur' + i;
+//             const technologieKey = 'technologie' + i;
+//             const siteKey = 'site' + i;
+//             const priseEnChargeKey = 'prise_encharge' + i;
+//             const imgKey = 'Logo' + i;
+
+//             if (dataInfos[operateurKey]) {
+//                 // Utilisez innerHTML pour ajouter du contenu à l'élément
+//                 // operateurContent.innerHTML += '<div class="tab-pane' + (i === 1 ? ' show active' : '') + '" id="onglet' + i + '">';
+//                 operateurContent.innerHTML += '<div class="box">';
+//                 operateurContent.innerHTML += '<img class="operator-logo" src="' + dataInfos[imgKey] + '" alt="Logo" style="max-width: 80px; max-height: 80px;">';
+//                 operateurContent.innerHTML += '<br><b>Opérateur :</b> ' + dataInfos[operateurKey] + '<br>';
+//                 operateurContent.innerHTML += '<b>Technologie :</b> ' + dataInfos[technologieKey] + '<br>';
+//                 operateurContent.innerHTML += '<b>Site :</b> <a href="' + dataInfos[siteKey] + '" target="_blank">' + breakLines(dataInfos[siteKey], 40) + '</a><br>'; // Utilisation de la balise <a> pour le lien
+//                 operateurContent.innerHTML += '<b>Prise en charge supérieure à 300€ <br>(sous conditions de ressources) :</b> ' + dataInfos[priseEnChargeKey] + '<br>';
+//                 operateurContent.innerHTML += '</div>';
+
+//                 operateurContent.innerHTML += '<div style="margin-bottom: 30px;"></div>';
+
+//             }
+//         }
+//      }
+// }
+
+
 function operateurInfo(feature) {
     const operateurContent = document.getElementById("operateur-content");
     const dataInfos = feature.properties;
     operateurContent.classList.add("operator-content"); // permet de définir le style en CSS 
     const noOfferMessage = "Le territoire ne possède actuellement pas d'offre de nos partenaires.";
 
-    if (dataInfos['opérateur1'] !== noOfferMessage) { //Si la valeur de l'opérateur1 mentionne qu'il n'y a pas de partenaires, alors on affiche pas de contenu.
+    // Nettoyer le contenu précédent
+    operateurContent.innerHTML = '';
+
+    if (dataInfos['opérateur1'] === noOfferMessage) {
+        // Si 'opérateur1' a la valeur "noOfferMessage", afficher uniquement cette valeur
+        const noOfferElement = document.createElement('div');
+        noOfferElement.className = 'no-offer-message'; // Appliquer la classe CSS pour les boîtes en pointillés
+        noOfferElement.textContent = noOfferMessage;
+        operateurContent.appendChild(noOfferElement);
+    } else {
         for (let i = 1; i <= 7; i++) {
             const operateurKey = 'opérateur' + i;
             const technologieKey = 'technologie' + i;
@@ -25,112 +67,43 @@ function operateurInfo(feature) {
 
             if (dataInfos[operateurKey]) {
                 // Utilisez innerHTML pour ajouter du contenu à l'élément
-                // operateurContent.innerHTML += '<div class="tab-pane' + (i === 1 ? ' show active' : '') + '" id="onglet' + i + '">';
-                operateurContent.innerHTML += '<div class="box">';
-                operateurContent.innerHTML += '<img class="operator-logo" src="' + dataInfos[imgKey] + '" alt="Logo" style="max-width: 80px; max-height: 80px;">';
-                operateurContent.innerHTML += '<br><b>Opérateur :</b> ' + dataInfos[operateurKey] + '<br>';
-                operateurContent.innerHTML += '<b>Technologie :</b> ' + dataInfos[technologieKey] + '<br>';
-                operateurContent.innerHTML += '<b>Site :</b> <a href="' + dataInfos[siteKey] + '" target="_blank">' + breakLines(dataInfos[siteKey], 40) + '</a><br>'; // Utilisation de la balise <a> pour le lien
-                operateurContent.innerHTML += '<b>Prise en charge supérieure à 300€ <br>(sous conditions de ressources) :</b> ' + dataInfos[priseEnChargeKey] + '<br>';
-                operateurContent.innerHTML += '</div>';
+                const infoElement = document.createElement('div');
+                infoElement.className = 'operator-separateur'; 
+                infoElement.innerHTML += '<img class="operator-logo" src="' + dataInfos[imgKey] + '" alt="Logo" style="max-width: 80px; max-height: 80px;">';
+                infoElement.innerHTML += '<br><b>Opérateur :</b> ' + dataInfos[operateurKey] + '<br>';
+                infoElement.innerHTML += '<b>Technologie :</b> ' + dataInfos[technologieKey] + '<br>';
+                infoElement.innerHTML += '<b>Site :</b> <a href="' + dataInfos[siteKey] + '" target="_blank">' + breakLines(dataInfos[siteKey], 40) + '</a><br>';
+                infoElement.innerHTML += '<b>Prise en charge supérieure à 300€ <br>(sous conditions de ressources) :</b> ' + dataInfos[priseEnChargeKey] + '<br>';
 
-                operateurContent.innerHTML += '<div style="margin-bottom: 30px;"></div>';
-
+                operateurContent.appendChild(infoElement);
             }
         }
     }
 }
 
-  // Appeler la fonction pour ajouter le titre au chargement de la page
-  
-//Liste des opérateurs partenaires pour chaque DEP
-function createListOperateur(feature){
-    const listOperateurs = document.querySelector(".liste-operateurs");
-    listOperateurs.classList.add("operator-list");
-
-    // Récupérer la valeur de la première colonne des opérateurs
-    const operateur1Value = feature.properties['opérateur1'];
-
-    // Vérifier si la valeur est différente de "blabla"
-    if (operateur1Value !== "Le territoire ne possède actuellement pas d'offre de nos partenaires.") {
-        // Ajouter le titre "Liste des opérateurs partenaires"
-        const titreElement = document.createElement('div');
-        titreElement.classList.add('nav-item', 'titre-liste-operateurs');
-        titreElement.textContent = 'Liste des opérateurs partenaires';
-        listOperateurs.appendChild(titreElement);
-    }
-
-    // Boucle pour ajouter chaque opérateur
-    for (let i = 1; i <= 7; i++) {
-        const operateurKey = 'opérateur' + i;
-        const operateurValue = feature.properties[operateurKey];
-
-        // Vérification si la valeur de l'opérateur n'est pas null et différente de "blabla"
-        if (operateurValue !== null && operateurValue !== undefined) {
-            // Ajout d'un élément de liste à la liste
-            const listItem = document.createElement('li');
-            listItem.classList.add('nav-item');
-
-            // Création du contenu du li (sans lien)
-            listItem.innerHTML = '<span class="nav-link' + (i === 1 ? ' active' : '') + '" id="onglet' + i + '-tab">' + operateurValue + '</span>';
-
-            // Ajout du li à la liste
-            listOperateurs.appendChild(listItem);
-        }
-    }  
-};
 
 // Création du contenu de la sidebar
 function createSidebarContent(feature) {
     
     const cardHeader = document.querySelector(".card-header");
-    const listOperateurs = document.querySelector(".liste-operateurs");
-    const bntOperateur = document.getElementById("bnt-operateur");
-    const bntRetourListe = document.getElementById("bnt-retour-liste");
+    const bntRetourAccueil = document.getElementById("bnt-retour-accueil");
     const operateurContent = document.getElementById("operateur-content");
     const dataInfos = feature.properties;
     
-    listOperateurs.innerHTML = '';
     operateurContent.innerHTML = '';
     
-    //gestion des styles
-    listOperateurs.style.display ='block';
-    bntOperateur.style.display= 'block';
-    bntRetourListe.style.display='none';
-    operateurContent.style.display='none';
-
-
+  
     // Récupérer le titre : nom du département séléctionné
     cardHeader.innerHTML = '<div id="nom-programme" ><span><p class="dep-txt-sidebar">' + dataInfos[`dep`] + '</p></span></div>';
-    createListOperateur(feature);
+    // createListOperateur(feature);
     operateurInfo(feature);
-    if (dataInfos['opérateur1'] !== "Le territoire ne possède actuellement pas d'offre de nos partenaires.") {
-        bntOperateur.style.display = 'block'; //Si un territoire possède pas de partenaire, alors le bouton ne s'affiche pas. 
-
-        bntOperateur.addEventListener('click', function() {
-            //gestion des styles
-            operateurContent.style.display='block';
-            listOperateurs.style.display ='none';
-            bntRetourListe.style.display ='block';
-            bntOperateur.style.display ='none';
-        });
-
-        bntRetourListe.addEventListener('click', function(){
-            //gestion des styles
-            bntRetourListe.style.display='none';
-            listOperateurs.style.display ='block';
-            operateurContent.style.display='none';
-            bntOperateur.style.display ='block';
-
-        });
-    } else {
-        bntOperateur.style.display = 'none';
-
-    }
-   
-    
-    return listOperateurs;
-}
+    bntRetourAccueil.style.display='block'
+    bntRetourAccueil.addEventListener('click', function(){
+        sidebar.open('home');
+    });
+  
+    return operateurContent;
+};
 
 /* ------------------------- */
 /*  CREATION FICHIERS GEO   */
@@ -319,7 +292,7 @@ mymap.panInsideBounds(calculateBounds(), { animate: false });
 //Sources en bas à droite 
 mymap.attributionControl.addAttribution('<a href="https://agence-cohesion-territoires.gouv.fr/" target="_blank">ANCT 2023</a> | <a href="https://www.ign.fr/institut/ressources-pedagogiques" target="_blank">Fond cartographique IGN</a>');
 
-mymap.dragging.disable(); // empeche le déplacement libre sur l'emprise de la carte 
+//mymap.dragging.disable(); // empeche le déplacement libre sur l'emprise de la carte 
 
 //Niveau de zoom : Min & Max
 mymap.setMinZoom(4);
