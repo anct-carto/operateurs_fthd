@@ -1,6 +1,6 @@
 ## Carte interactive des opérateurs France Très Haut Débit
 
-![alt text](img/image_preview.png)
+![alt text](img/image_preview_fthd.PNG)
 
 Lien direct : https://carto.pages.sit.incubateur.tech/fthd_operateurs/
 
