@@ -12,14 +12,10 @@ La carte interactive du programme France Très Haut Débit.
 
 ## Fonctionnalités 
 
-- Rechercher les opérateurs FTHD par départements
+- Rechercher les opérateurs partenaires du programme France Très Haut Débit par département
 
 
 ## Données et cartes
-
-Les données seront diffusées sous licence Ouverte Étalab 2.0 sur la page data.gouv de l'ANCT. 
-
-Lien pour télécharger les données : https://www.data.gouv.fr/fr/organizations/agence-nationale-de-la-cohesion-des-territoires/#/presentation <br>
 
 Lien pour visualiser et télécharger les cartes réalisées par l'ANCT : https://cartotheque.anct.gouv.fr/cartes 
 
