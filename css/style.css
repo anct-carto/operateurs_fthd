@@ -216,6 +216,7 @@ html, body {
 .operator-separateur {
     border-top: 1px dashed darkgray; /* Ligne pointillée en bas de chaque élément de la liste */
     padding-bottom: 10px; /* Espace en bas de chaque élément de la liste */
+	padding:10px;
     margin-bottom: 10px; /* Espace entre les éléments de la liste */
 }
 
@@ -246,6 +247,10 @@ html, body {
 	margin-bottom: 10px;
 	border:none;
 }
+#bnt-retour-accueil:hover {
+	background-color: rgb(228, 228, 231);
+	color: #398373; /* Texte en blanc */
+}
 
 #bnt-site-fthd {
 	font-family: "Marianne", sans-serif; /* Utilise la police Marianne ou une police sans-serif de secours */
@@ -258,4 +263,8 @@ html, body {
 	cursor: pointer; /* Curseur en main pour indiquer un bouton cliquable */
 	margin-bottom: 10px;
 	border:none;
+}
+#bnt-site-fthd:hover {
+	background-color: rgb(228, 228, 231);
+	color: #398373; /* Texte en blanc */
 }
