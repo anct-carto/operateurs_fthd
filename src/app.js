@@ -346,7 +346,7 @@ function calculateBounds() {
 /* --------------- */
 /*     CARTE      */
 /* -------------- */
-var mymap = L.map('map').setView([46.603354, -18], 5);
+var mymap = L.map('map').setView([46.603354, -8], 5);
 
 // Mise à jour de l'emprise maximale lors du redimensionnement de la fenêtre
 window.addEventListener('resize', function () {
